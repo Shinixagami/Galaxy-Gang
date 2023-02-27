@@ -21,6 +21,8 @@ export const PaddingMiddle = styled.div`
   text-align: center;
 
   font-size: 1.6rem;
+
+  
   
 `;
 
