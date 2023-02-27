@@ -54,7 +54,7 @@ import GuiTesting from './Dapp_Components/dao/gui/';
 
 
 //testing
-import CaylaPage from './pages/cayla/';
+// import CaylaPage from './pages/cayla/';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -75,6 +75,9 @@ import  ProfilePage01  from './pages_Dapp/social_profile/profile.jsx';
 
 
 import Home from './pages/';
+
+import ManagePage from './pages/manage';
+
 
 /*
 import DaoHome from "./pages/Home.jsx";
@@ -119,7 +122,7 @@ const App = () =>  {
           <Route path="/extra" element ={<SocialHomePage01/>} />
           <Route path="/pfp" element ={<ProfilePage01/>} />
 
-          <Route path="/cayla" element ={<CaylaPage/>} />
+          <Route path="/manage" element ={<ManagePage/>} />
 
           
           <Route path="/dao" element ={<DAOPage01/>} >
