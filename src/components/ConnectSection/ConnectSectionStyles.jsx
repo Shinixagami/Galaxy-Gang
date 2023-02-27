@@ -5,6 +5,20 @@ import styled from 'styled-components';
 import { keyframes } from 'styled-components'
 
 
+export const NavSpacer = styled.div`
+
+
+  background-color: red;
+
+
+  padding: 8vh;
+
+
+
+`
+
+
+
 //THIS IS LEFT TRAITS CONTAINER
 export const ConnectBtnBGContainer = styled.div`
 
@@ -12,14 +26,20 @@ export const ConnectBtnBGContainer = styled.div`
   
   display: flex;
   position: relative;
+
+  flex-direction: row;
+/*   flex-grow: 5; */
   z-index: 12; /*hero section is 10 */
 
+  flex-wrap: wrap;
+  
+
   
 
 
   
 
-  transform: skewY(2deg);
+/*   transform: skewY(2deg); */
   
   margin-top: -7%;
   
@@ -32,14 +52,14 @@ export const ConnectBtnBGContainer = styled.div`
   font-size: 2em;
   color: white;
 
-  background-color: yellow;
+  background-color: lime;
 
   &:hover{
   }
 
     /* turns off display if its over 1000 */
-   @media screen and (max-width: 600px) {
-      padding: 10px;
+   @media screen and (max-width: 900px) {
+       flex-direction: column;
   } 
 
 `
@@ -85,8 +105,6 @@ export const Container = styled.div`
   background-color: green;
 
 
-  display: in-line-bl
-
 
 `
 
@@ -114,6 +132,12 @@ export const BtnContainer = styled.nav`
 /*    margin: auto; */
   
    width: 100%;
+
+
+   padding: 20px;
+
+
+
   
 /*    border: 15px solid green; */
   
@@ -154,7 +178,7 @@ export const BtnConnectWallet = styled.div`
 
 /*   border-radius: 50px; */
 
-
+  margin: 5%;
   border-radius: 25px 25px;
 
   background: linear-gradient(-45deg, #8436d1, #6722ab ,#715bb0, #c852f2);
@@ -163,7 +187,7 @@ export const BtnConnectWallet = styled.div`
   padding: 10px 22px;
   color: white;
   
-  font-size: 19px;
+  font-size: 1.2rem;
   font-weight: bold;
   outline: none;
 
@@ -211,18 +235,25 @@ export const BtnConnectWallet = styled.div`
   &:active{
 
     transform: scale(.8);
-
-    
     
   }
 
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 880px) {
     
     font-size: 1rem;
-    width: 55%;
+    width: 90%;
 
   }
+
+
+  @media screen and (max-width: 400px) {
+    
+    font-size: .8rem;
+    width: 90%;
+
+  }
+
 
 
   

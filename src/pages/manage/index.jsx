@@ -3,9 +3,18 @@ import React, { useEffect, useState } from 'react'
 
 import { CModal } from './modal';
 
+//connect btn for testing
+import ConnectSection from '../../components/ConnectSection/';
 
+import { 
+  
+  ManageBG, 
+  Manage_Footer,
 
-import { ManageBG, Manage_Footer } from './ManageElements'
+  NavbarSpacer
+       
+       
+} from './ManageElements'
 
 const ManagePage = () => {
 
@@ -15,6 +24,8 @@ const ManagePage = () => {
 
     <>
     <ManageBG>
+
+      <NavbarSpacer/>
       
       <ConnectSection/>
 

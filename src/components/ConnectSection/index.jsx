@@ -3,6 +3,8 @@
 import {
 
   ConnectBtnBGContainer,
+  NavSpacer,
+  
  
 
   BtnContainer,
@@ -106,10 +108,10 @@ const ConnectSection = () => {
 
   return(
 
-    <div>
-      
+    <>
+
       <ConnectBtnBGContainer>
-          
+
        <BtnConnectWallet  onClick={connectWallet}>
           Connect Wallet
        </BtnConnectWallet>
@@ -138,10 +140,14 @@ const ConnectSection = () => {
        <BtnConnectWallet  onClick={connectWallet}>
         Token Uri Reveal 
        </BtnConnectWallet>
+
+
+  
+        
       
       </ConnectBtnBGContainer>
       
-    </div>
+    </>
 
   );
 

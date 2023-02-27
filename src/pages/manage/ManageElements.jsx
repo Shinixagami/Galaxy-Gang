@@ -9,7 +9,7 @@ export const NavbarSpacer = styled.div`
 
 /*   background-image: url("https://64.media.tumblr.com/25c4d9fbef4e4f3e4b7a71ffdd7a3fff/tumblr_pqje6pkTS01xxtdwmo1_640.gifv"); */
 
-  padding: 75px;
+  padding: 8vh;
   background-color: red;
 
 `
