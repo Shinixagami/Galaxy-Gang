@@ -3,6 +3,8 @@
 import {
 
   ConnectBtnBGContainer,
+  NavSpacer,
+  
  
 
   BtnContainer,
@@ -101,15 +103,12 @@ const ConnectSection = () => {
       
   };
   
-
-
-
   return(
 
-    <div>
-      
+    <>
+
       <ConnectBtnBGContainer>
-          
+
        <BtnConnectWallet  onClick={connectWallet}>
           Connect Wallet
        </BtnConnectWallet>
@@ -141,7 +140,7 @@ const ConnectSection = () => {
       
       </ConnectBtnBGContainer>
       
-    </div>
+    </>
 
   );
 

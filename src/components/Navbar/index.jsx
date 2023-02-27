@@ -202,7 +202,7 @@ const Navbar01 = () => {
       <NavbarContainer>
 
         <NavLogo to = '/'> 
-          <NavLogoText>Shinixagami</NavLogoText>
+          <NavLogoText>Galaxy Gang</NavLogoText>
         </NavLogo>
 
         <MobileIcon onClick={toggle}> 

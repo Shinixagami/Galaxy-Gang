@@ -51,7 +51,9 @@ import Modal from '../components/DropDownMSG'
 import { motion } from 'framer-motion'
 
 //css for text
+// <ToDoList01/>
 
+  
 /* Actual Home page */
 const Home = () => {
 
@@ -66,14 +68,10 @@ const Home = () => {
       <HeroSection01/>
       
       <InfoSection01/>
-  
-      <MediaPlayer01/>
 
       <ConnectSection/>
 
 
-  
-      <ToDoList01/>
 
         <Home_Footer>
           All Rights Reserved. Under Development.

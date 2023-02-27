@@ -5,7 +5,14 @@ import {Link as LinkS} from 'react-scroll'
 export const HomeBG = styled.div`
 
 
-  background-image: url("https://64.media.tumblr.com/25c4d9fbef4e4f3e4b7a71ffdd7a3fff/tumblr_pqje6pkTS01xxtdwmo1_640.gifv");
+/*   background-image: url("https://64.media.tumblr.com/25c4d9fbef4e4f3e4b7a71ffdd7a3fff/tumblr_pqje6pkTS01xxtdwmo1_640.gifv"); */
+
+
+
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+
+
 
   background-repeat: no-repeat; 
   background-size: cover;

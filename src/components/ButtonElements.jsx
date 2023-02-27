@@ -22,11 +22,9 @@ align-items: center;
 transition: all 0.2s eas-in-out;
 
 &:hover{
+  
+  transition: all 0.4s eas-in-out;
+  background: ${({primary}) => (primary ? '#fff' : '#01BF71')};
 
-    transition: all 0.4s eas-in-out;
-
-    background: ${({primary}) => (primary ? '#fff' : '#01BF71')};
-
-    }
-
+}
 `

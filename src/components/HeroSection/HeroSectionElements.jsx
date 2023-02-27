@@ -94,7 +94,15 @@ export const GifBg = styled.div`
  */
   /* whale */
 
-  background-image: url("https://i.imgur.com/Mgw1Q0J.png");
+/*   background-image: url("https://i.imgur.com/Mgw1Q0J.png"); */
+
+
+  background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
 
   background-repeat: no-repeat;
   background-size: cover;
