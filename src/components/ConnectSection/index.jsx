@@ -137,6 +137,10 @@ const ConnectSection = () => {
        <BtnConnectWallet  onClick={connectWallet}>
         Token Uri Reveal 
        </BtnConnectWallet>
+
+
+  
+        
       
       </ConnectBtnBGContainer>
       
