@@ -1,0 +1,99 @@
+.UI_Center-Items{
+  
+  text-align: center;
+  align-items: center; 
+  padding-bottom: 5%;
+  padding-top: 7%;
+
+  /*No need for z index unless theres layed items*/
+  /*z-index: 3;*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative; 
+
+
+  
+}
+
+
+
+.AudioPlayerContainer{
+
+  text-align: center;
+  padding-bottom: 2%;
+  
+}
+
+
+/* Whole enclosuer  */ 
+audio::-webkit-media-controls-enclosure {
+
+}
+
+
+audio::-webkit-media-controls-timeline, video::-webkit-media-controls-timeline {
+  
+  /*filter: invert(100%);
+  box-shadow: 0 ;*/
+
+}
+
+/*current time*/ 
+audio::-webkit-media-controls-current-time-display, video::-webkit-media-controls-current-time-display {
+  
+}
+
+
+
+/* play timeline */ 
+audio::-webkit-media-controls-play-button {
+
+  /*filter: invert(100%); */
+}
+
+
+/* play timer */ 
+audio::-webkit-media-controls-volume-slider, video::-webkit-media-controls-volume-slider {
+  
+    /*filter: invert(100%);*/
+}
+
+
+
+audio::-webkit-media-controls-panel {
+  
+background: linear-gradient(-45deg, #cbfd17, #f6c71e, #f4ec0b) ;
+
+}
+
+/* do not change background color */
+video::-webkit-media-controls-panel{
+  
+  
+}
+
+
+
+/* EXPERIMENTAL BELOW */
+video::cue(:future) {
+    color: #fa0000;
+  
+}
+
+video::-webkit-media-text-track-container b {
+    font-weight: bold;
+}
+
+video::-webkit-media-text-track-container u {
+    text-decoration: underline;
+}
+
+video::-webkit-media-text-track-container i {
+    font-style: italic;
+}
+
+
+

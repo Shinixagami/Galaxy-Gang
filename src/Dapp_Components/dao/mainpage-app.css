@@ -1,0 +1,362 @@
+
+/* 2nd level container -whole dao /main */
+.daoMainPage {
+
+
+  /* LIGHT BLUE */
+background: rgba(14, 146, 179, 0.65);
+border-radius: 32px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+
+
+  /* PURE GLASS */
+/*   background: rgba(4, 37, 64, 0.33);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px); */
+
+
+/* BLUE: */
+/* background: rgba(10, 117, 206, 0.77);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px); */
+
+  box-shadow: rgb(94, 129, 166) 0px 20px 30px -10px;
+  
+  display: flex;
+/*   justify-content: space-between; */
+
+/*   temporary */
+  margin-top: 100px; 
+
+  justify-content: center; 
+
+  /* added by gabe  88 */
+  
+/*   height: 88.5vh; */
+  margin-bottom: 128px;
+
+/*   height: 1200px; */
+  
+  
+}
+
+
+
+/* not useful atm*/
+body {
+
+    /* if you see this color there is an error with the containers */
+  /*   background-color:  #ff00dd; */
+  
+   /* DO NOT ADD OTHER THINGS HERE DOESNT REALLY WORK - USE wave-bg,jsx */
+    /* gives main container waveportal 50px padding */
+  /*   margin-right: 50px; */
+  
+}
+
+
+@keyframes fadeDao {
+
+  0% {
+    opacity: 0;
+
+  }
+  20% {
+    opacity: 0.5;
+
+  }
+
+  50% {
+    opacity: 0.8;
+
+  }
+
+  90% {
+    opacity: 0.9;
+
+  }
+
+  100% {
+    opacity: 1;
+  }
+
+}
+
+/***** Slide Right *****/
+.slide-right {
+  animation: 5s slide-right;
+}
+
+@keyframes slide-right {
+  
+  0% {
+    opacity: 0.5;
+    transform: translateX(-280px);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  
+}
+
+/***** Slide Left *****/
+.slide-left {
+  animation: 5s slide-left;
+}
+
+@keyframes slide-left {
+
+  0% {
+    opacity: 0.5;
+    transform: translateX(280px);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateX(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  
+}
+
+
+.daoLeftSideBar {
+
+  
+   /* From https://css.glass */
+/*   background: linear-gradient(189.59deg, rgba(157, 170, 241, 0.83) 5.94%, #098be1 84.85%); */
+
+background: linear-gradient(200.34deg, rgba(14, 155, 235, 0.76) 28.4%, rgba(70, 198, 226, 0.796768) 54.32%, rgba(22, 136, 201, 0.94) 91.34%);
+
+/* 
+  background: linear-gradient(200.34deg, rgba(14, 155, 235, 0.76) 28.4%, rgba(30, 174, 205, 0.796768) 54.32%, rgba(22, 136, 201, 0.94) 91.34%); */
+  
+/*   
+ background: linear-gradient(200.34deg, rgba(14, 155, 235, 0.46) 28.4%, rgba(70, 198, 226, 0.6) 54.32%, rgba(22, 136, 201, 0.53) 91.34%); */
+  
+  
+border-radius: 32px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4.8px);
+-webkit-backdrop-filter: blur(4.8px);
+  
+  box-shadow: rgba(41, 146, 166, 0.15) 0px 5px 15px 0px;
+
+ 
+  
+  
+  position: sticky;
+
+  /* width calculations need to be improved*/
+  width: 25%;
+  
+/* 
+  background-color: red;
+  border-right: 1px solid rgb(63, 63, 63);
+  color: white; */
+  
+
+
+  /* justify-content: center; */
+  
+  /* does not work position is locked */
+/*   @media screen and (max-width: 1200px) {
+
+    background-color: red;
+  
+  } */
+
+
+  animation-iteration-count: initial;
+  animation: slide-right ease 4s;
+
+
+
+  
+}
+
+
+.daoLeftPFP{
+
+  object-fit: cover;
+
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  
+  left: 96px;
+  top: 89px;
+
+  opacity: 0.9;
+
+  object-fit: cover;
+  background-size: cover;
+
+  border-radius: 20px;
+
+}
+
+.daoRightBar {
+
+   
+  background: rgba(49, 99, 185, 0.53);
+border-radius: 32px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4.8px);
+-webkit-backdrop-filter: blur(4.8px);
+  
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+
+
+
+  height: auto;
+  
+/*   color: white; */
+
+  position: sticky;
+  top: 0px;
+  
+  width: 30%;
+  
+  animation-iteration-count: initial;
+  animation: slide-left ease 4s;
+
+
+  /* seems to be not working */
+  align-items: center;
+  justify-content: center;
+
+
+  
+
+  
+} 
+
+
+@keyframes bounce {
+   0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+   40% {transform: translateY(-18px);} 
+   60% {transform: translateY(-11px);} 
+  
+} 
+
+@keyframes PageSwap {
+
+
+  0% {
+    opacity: 0;
+    transform: translateY(280px);
+
+  }
+  20% {
+    opacity: 0.5;
+
+  }
+
+  50% {
+    opacity: 0.8;
+
+  }
+
+  90% {
+    opacity: 0.9;
+
+  }
+
+  100% {
+    opacity: 1;
+  }
+
+}
+
+
+
+
+
+
+.daoMainWindow {
+  
+  width: 700px;
+
+  
+
+
+
+  
+  /* temporary - set it to initial after */
+/*   animation-iteration-count: initial; */
+/*   animation: PageSwap ease 5s;  */
+
+  
+}
+
+/* Text Field */
+/* .sc-fWIMVQ {
+  background-color: transparent !important;
+  border-right: 0px !important;
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-radius: 0px !important;
+  border-bottom: 1px solid rgb(63, 63, 63) !important;
+  color: white !important;
+  height: 90px !important;
+} */
+
+/* Text Area */
+.sc-jWEIYm {
+  color: white !important;
+  fill: white !important;
+  font-size: 20px !important;
+  height: 10px !important;
+}
+
+.rdMZu {
+    min-height: 90px !important;
+}
+
+
+/* DO NOT TURN THIS ON BROKEN */
+/* a:-webkit-any-link {
+  cursor: pointer;
+  text-decoration: none !important;
+  height: 0px !important;
+} */
+
+.logout{
+  display: flex;
+  justify-content: end;
+  margin-right: 100px;
+  font-weight: bold;
+}
+
+.logout:hover {
+  color:gray;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.loginPage {
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}

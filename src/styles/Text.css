@@ -1,0 +1,250 @@
+/*text style*/
+
+.text-container{
+
+  padding-top: 30%; 
+
+  display: flex; /*added*/
+  flex-direction: column; /*added*/
+
+  flex-wrap: wrap;.
+  
+  align-text: center;
+
+  height: 1400px;
+  width: 100%;
+  
+   @media screen and (max-width: 768px) {
+
+ 
+     transform: translate(-420px, -180px);
+
+    /*animation*/
+    transition: 0.8s all ease;
+
+     padding-top: 100%;
+
+  }
+
+
+}
+
+
+@container (max-width: 768px){
+  
+  transform: translate(-420px, -180px);
+  
+}
+
+
+
+
+
+/* transparent gradien text */
+/* this goes to Navbar Component */
+h1 {
+  font-size: 28px;
+  font-family: 'Cabin';
+  font-weight: bold;
+
+  background: -webkit-linear-gradient(left, #46abe6, #2ad1b5, #46abe6);
+  background-size: 200% 200%;
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+}
+
+
+h2{
+  
+  padding-top: 2%;
+
+  font-family: 'VT323', monospace;
+  
+  font-size: 180%;
+
+  color: #29c9ff;
+
+  text-shadow: 2px 4px 3px rgba(255, 255, 255,.35);
+  
+
+
+  
+}
+
+h3{
+
+  padding-top: 2%;
+
+  font-family: 'Permanent Marker', cursive;
+  
+  font-size: 150%;
+
+ color: black;
+
+  
+}
+
+
+h4{
+
+
+  font-family: 'Inter', sans-serif;
+  
+  font-size: 110%;
+
+  color: black;
+
+  
+}
+
+
+/*text will fall off screen and cause problems on mobile devices*/
+.text-1{
+
+  font-size: 30px;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+
+  padding-top: 10%;
+
+  align-self: center;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  /*wrapping will overflow*/
+  /*white-space: nowrap;*/
+
+}
+
+
+.text-2{
+
+  font-size: 20px;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+
+  padding-right: 35px;
+  padding-left: 35px;
+  padding-bottom: 2%;
+
+}
+
+.text-3{
+
+
+  display: block;
+
+  color: white;
+
+  font-size: 20px;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+
+  padding-right: 35px;
+  padding-left: 35px;
+
+  padding-top: 85px; 
+
+  padding-bottom: 60px;
+
+
+}
+
+/*Permanenet Marker*/
+.text-4-marker{
+
+  padding-top: 2%;
+
+  font-family: 'Permanent Marker', cursive;
+  
+  font-size: 150%;
+
+  color: white; 
+  
+
+}
+
+
+.text-4-marker-nopad{
+
+/*   padding-top: 0%; */
+
+  font-family: 'Permanent Marker', cursive;
+  
+  font-size: 150%;
+  
+
+}
+
+
+.text-4-marker-med{
+
+  padding-top: 2%;
+
+  font-family: 'Permanent Marker', cursive;
+  
+  font-size: 120%;
+  
+
+}
+
+
+
+
+
+.text-break{
+
+  display: block;
+
+  font-size: 20px;
+
+  padding-top: 1px; 
+
+}
+
+.text-bold{
+  padding-top: 1px; 
+
+  font-family: 'Cabin';
+  font-size: 24px;
+  font-weight: bold;
+
+  background: -webkit-linear-gradient(left, #0b88d0, #244741);
+  background-size: 150% 150%;
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+
+.text-center{
+
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  padding-bottom: 2%;
+
+  color: white; 
+
+  font-size: 24px;
+
+  
+  text-shadow: black 0.1em 0.1em 0.2em
+  
+
+  
+  
+
+}
+
+
+.text-center-image{
+
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  padding-bottom: 2%;
+
+}

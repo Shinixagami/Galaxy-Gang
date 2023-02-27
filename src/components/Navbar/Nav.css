@@ -1,0 +1,22 @@
+.nav_heightlight{
+
+
+  /*comment the lines below to turn wholoe navbar transparent*/
+  height:74px;
+  width: 100%;
+  
+  top: 0;
+  position: fixed;
+
+  transition-timing-function: ease-in; 
+  transition: 0.5s;
+
+  z-index: 13;
+  
+}
+
+.nav_yellow{
+  
+  background-color: #ff00f7;
+  
+}

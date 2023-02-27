@@ -1,0 +1,24 @@
+
+
+
+
+
+.UI_Center-Items{
+  
+  text-align: center;
+  align-items: center; 
+  padding-bottom: 2%;
+
+  /*No need for z index unless theres layed items*/
+  /*z-index: 3;*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative; 
+  
+}
+
+
+

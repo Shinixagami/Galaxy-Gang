@@ -1,0 +1,105 @@
+.siderContent{
+
+
+  
+    padding: 30px;
+    
+    justify-content: space-between;
+  
+    display: flex;
+    flex-direction: column;
+
+
+  /* use this to make it responsive*/
+/*     height:50vh; */
+
+    
+
+    /* tthis causes everthing to flop to the end */
+/*     align-items: end; */
+
+
+    align-items: center;
+
+}
+
+.logoContainer{
+
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  
+}
+
+
+
+
+.details {
+    display: flex;
+    padding: 45px;
+    gap:14px;
+    justify-content: start;
+    align-items: center;
+    text-decoration: none !important;
+}
+
+
+
+
+.menuItemsL {
+
+
+    display: flex;
+    justify-content: start;
+    gap: 14px;
+    margin-top: 20px;
+    align-items: center;
+    font-weight: 600;
+    font-size: 20px;
+    padding:10px;
+    border-radius: 1000px;
+    color: white !important;
+  
+    text-decoration: none !important;
+
+    text-decoration: none;
+
+
+  
+}
+
+.menuItemsL:hover{
+    cursor:pointer;
+    background-color: #282828;
+   text-decoration: none;
+
+  
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
+.menu-dao{
+
+  padding: 20px;
+
+
+  text-decoration: none;
+
+  /* From https://css.glass */
+  background: rgba(27, 208, 247, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.2px);
+  -webkit-backdrop-filter: blur(3.2px);
+  
+  
+}
+
+
+

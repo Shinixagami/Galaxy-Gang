@@ -1,0 +1,36 @@
+{
+  "files": {
+    "src/Dapp_Components/dao/index.jsx": [
+      {
+        "id": "f104535b-67b8-46bc-a362-61aaf6489aeb",
+        "line": 12,
+        "version": 8427,
+        "index": 380
+      }
+    ],
+    "src/Dapp_Components/mint/NetworkConfig/MarketplaceConfigInterface.tsx": [
+      {
+        "id": "e9e68389-97a3-4879-9133-8f7eed91f2fe",
+        "line": 5,
+        "version": 1,
+        "index": 158
+      }
+    ],
+    "src/Dapp_Components/waveportal/wave-bg.jsx": [
+      {
+        "id": "af0b248e-bb4c-42bc-b796-ed162ddcd31c",
+        "line": 75,
+        "version": 2269,
+        "index": 1171
+      }
+    ],
+    "src/components/InfoSection/index.jsx": [
+      {
+        "id": "39d97d84-834b-433a-99dd-4ed57415db14",
+        "line": 4,
+        "version": 3323,
+        "index": 105
+      }
+    ]
+  }
+}

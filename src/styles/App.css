@@ -1,0 +1,165 @@
+/*default font style for everything*/
+
+
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+  /* two font families */
+/*   font-family: 'Nunito', sans-serif, 'Cabin' ; */
+
+  /* MAIN FONT HERE */
+  font-family: 'VT323', monospace;
+  
+}
+
+
+
+
+/* link 
+https://stackoverflow.com/questions/52288293/apply-different-background-image-for-different-pages-in-react-js
+*/
+
+/*temporary -need to create seprate files for  body now  */ 
+ body{
+
+/*    
+  background-image: url("  https://i.giphy.com/media/TqiwHbFBaZ4ti/giphy.webp");
+
+
+  background-repeat: no-repeat; 
+  background-size: cover; */
+  
+   
+/*   background-color:  #6ff005 ; */
+ 
+/* VHS */
+   
+/*   background-image: url("https://www.teahub.io/photos/full/11-111194_cyberpunk-pixel-art-gif.gif"); */
+
+/* standard: ; */
+
+/*    background-image: url("  https://c.tenor.com/6sjd441LIRIAAAAd/future.gif"); */
+
+
+/*    background-image: url("  https://imgs.search.brave.com/cPN3qmE_n9T7WDWtZ1zUPELeRn8BaNSnkYKjGZv7qKU/rs:fit:1200:675:1/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzVmLzA4/LzU4LzVmMDg1ODA5/ZjJiNzExNjQzZTRl/YjQ5NzRjYzAzYzBl/LmdpZg.gif"); */
+
+
+
+/*   background-image: url("  https://imgs.search.brave.com/271E7Bs8WxYkDq3HeUM9Iub7JcWry5wjoTIz5j1FXKw/rs:fit:960:640:1/g:ce/aHR0cHM6Ly9taXIt/czMtY2RuLWNmLmJl/aGFuY2UubmV0L3By/b2plY3RfbW9kdWxl/cy9tYXhfMTIwMC84/NDJjNWE0MTEzOTA2/OS41NzlhMTUxODY2/OGM3LmdpZg.gif"); */
+
+   
+/*   background-image: linear-gradient(315deg, #63a4ff 0%,   #83eaf1 74%); */
+
+  
+}  
+
+
+
+
+
+.center-item{
+  
+  text-align: center;
+  align-items: center; 
+  padding-bottom: 2%;
+
+  /*No need for z index unless theres layed items*/
+  /*z-index: 3;*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  
+}
+
+
+
+
+/* IMPORTED BUTTON */
+.button-19 {
+
+   /* makes code unselectable */
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+
+  font-family: 'Cabin';
+  font-size: 13px;
+  font-weight: bold;
+
+  font-weight: 800;
+  letter-spacing: .8px;
+  
+  appearance: button;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #0e0707;
+  background-color: #058ce1;
+  cursor: pointer;
+  
+  display: inline-block;
+  
+
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 12px;
+  
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  
+  width: 40%;
+
+  
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  
+}
+
+.button-19:main,
+.button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+
+  background-color: #0065b3;
+}
+
+.button-19:disabled {
+  cursor: auto;
+}
+
+
+
+
+
+
