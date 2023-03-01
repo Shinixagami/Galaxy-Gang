@@ -30,8 +30,6 @@ contract NFT is ERC721Enumerable, Ownable {
    bool public publicMintOpen = false;    
    bool public allowListMintOpen = false;
 
-
-
   bool public paused = false;
   bool public revealed = false;
   string public notRevealedUri;
