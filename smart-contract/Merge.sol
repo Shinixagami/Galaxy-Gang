@@ -30,6 +30,8 @@ contract NFT is ERC721Enumerable, Ownable {
    bool public publicMintOpen = false;    
    bool public allowListMintOpen = false;
 
+
+
   bool public paused = false;
   bool public revealed = false;
   string public notRevealedUri;
@@ -41,10 +43,7 @@ contract NFT is ERC721Enumerable, Ownable {
   string public _initNotRevealedUri = "ipfs://QmbqRtC4DkY7bdEp3D7jMoXSXwCNLmXPnG9dCea9HwMcGQ/hidden.json";  //Meta Data for before reveal (Hidden Meta Data)
 
 
-  string public _name = "Smart Mindz Test"
-
-  constructor(
-  ) ERC721(_name, _symbol) {
+  constructor() ERC721(_name, _symbol) {
     setBaseURI(_initBaseURI);
     setNotRevealedURI(_initNotRevealedUri);
   }
@@ -185,29 +184,14 @@ contract NFT is ERC721Enumerable, Ownable {
     /* setter functions -------------------- */
 
     //important
-  function setNextBatch() public onlyOwner {
+    function setNextBatch() public onlyOwner {
         require(maxSupply < totalMaxSupply, "Total Max Supply Reached!!!");
         maxSupply = maxSupply + nextBatchAddition;
     }
 
    
-  function setWalletPayout(uint256 _id, string _payAddress) public onlyOwner {
-
-
-    /*
-
-
-    1.
-    2.
-    3.
-    4.
-    5.
-
-    */
-
-
-   
-  }
+//   function setWalletPayout(uint256 _id, string _payAddress) public onlyOwner {
+//   }
 
 
   //pretty useless after contract is launched
