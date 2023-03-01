@@ -8,8 +8,15 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract Meraki is ERC721, ERC721Enumerable, Pausable, Ownable {
+
+
+    /* -------------------------------- */
     uint256 maxSupply = 100;  
     uint256 allowListMaxSupply = 2; //un-unsed
+
+
+
+
 
     //switches minting on 
     //allow editing for mints
