@@ -102,7 +102,6 @@ contract Meraki is ERC721, ERC721Enumerable, Pausable, Ownable {
         //total supply = how many NFTs minted so far
         require(totalSupply() <  maxSupply, "Max Supply Reached");
 
-
         //add internal mint !!
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();

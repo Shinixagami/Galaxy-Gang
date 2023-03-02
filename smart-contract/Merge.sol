@@ -6,31 +6,40 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 
 contract NFT is ERC721Enumerable, Ownable {
   using Strings for uint256;
-
+     
   string baseURI; //return function
   string public baseExtension = ".json";
 
 
+    address[5] public adminAddresses = [
+        0x3B1cC85f65223544A807b43d164A0BCc99eF6623, //gabe chrome 
+        0x6d98fb0308b99E3e7f89e91cF9565378aEbAc2E1  //gabe opera
+    ]; 
 
-  uint256 public cost = 0.02 ether;
+    /* 20000000 = 0.02 Eth */
+    /* 80000000 = 0.08 Eth */
+    /* 80000000 = 0.08 Eth */
+
+  uint256 public cost = 0.01 ether; //public mint cost 
+  
+  uint256 public whitelist_cost = 0.01 ether;
+
   uint256 public maxMintAmount = 3; //how many each person can mint 
 
-  uint256 public whitelist_cost = 0.02 ether;
-
   uint256 public totalMaxSupply = 6;  //total max supply of NFTs 
+
   uint256 public maxSupply = 2;  //this gets updated !!
+
   uint256 public nextBatchAddition = 2;  //how much each batch mints
 
-
    //allow editing for mints
-   bool public publicMintOpen = false;    
-   bool public allowListMintOpen = false;
-
-
+   bool public publicMintOpen = false;      //setter editMintWindows()
+   bool public allowListMintOpen = false;    //setter editMintWindows()
 
   bool public paused = false;
   bool public revealed = false;
@@ -41,6 +50,7 @@ contract NFT is ERC721Enumerable, Ownable {
   string public _symbol = "SMDZ";
   string public _initBaseURI = "ipfs://QmP7nDqvMKSZopkQFndFGkSPgwDzJb4Nk6DfDVia4iNXab";   //Meta Data for Mint 
   string public _initNotRevealedUri = "ipfs://QmbqRtC4DkY7bdEp3D7jMoXSXwCNLmXPnG9dCea9HwMcGQ/hidden.json";  //Meta Data for before reveal (Hidden Meta Data)
+
 
 
   constructor() ERC721(_name, _symbol) {
@@ -61,7 +71,7 @@ contract NFT is ERC721Enumerable, Ownable {
     require(publicMintOpen, "Public Mint Closed");
     require(!paused);
     require(_mintAmount > 0);
-    require(_mintAmount <= maxMintAmount);
+    require(_mintAmount <= maxMintAmount,  "Public Mint Sold Out!");
 
     require(supply + _mintAmount <= maxSupply);
 
@@ -86,7 +96,7 @@ contract NFT is ERC721Enumerable, Ownable {
 
     require(!paused);
     require(_mintAmount > 0);
-    require(_mintAmount <= maxMintAmount);
+    require(_mintAmount <= maxMintAmount, "Whitelist Mint Sold Out!");
 
     require(supply + _mintAmount <= maxSupply);
 
@@ -97,7 +107,55 @@ contract NFT is ERC721Enumerable, Ownable {
     for (uint256 i = 1; i <= _mintAmount; i++) {
       _safeMint(msg.sender, supply + i);
     }
+
   }
+
+
+  //--------------------------------------------------- MERKLE TREE FOR WHITELIST
+
+    bytes32 public root;
+
+    function testWhitelistMint(uint256 _mintAmount, bytes32[] memory proof) public payable {
+
+        uint256 supply = totalSupply();
+
+        require(isValid(proof, keccak256(abi.encodePacked(msg.sender))), "Not a part of Allowlist");
+
+
+        //same stuff DELETE
+        //  uint256 tokenId = _tokenIdCounter.current();
+        // _tokenIdCounter.increment();
+        // _safeMint(to, tokenId);
+
+        require(!paused);
+        require(_mintAmount > 0);
+        require(_mintAmount <= maxMintAmount, "Whitelist Mint Sold Out!");
+
+        require(supply + _mintAmount <= maxSupply);
+
+        if (msg.sender != owner()) {
+        require(msg.value >= cost * _mintAmount);
+        }
+
+        for (uint256 i = 1; i <= _mintAmount; i++) {
+        _safeMint(msg.sender, supply + i);
+        }
+
+    }
+
+
+     function isValid(bytes32[] memory proof, bytes32 leaf) public view returns (bool) {
+        return MerkleProof.verify(proof, root, leaf);
+    }
+
+
+
+//----- end of whitelist dev
+
+
+
+
+   
 
 
    //function might be better with merkle tree
@@ -105,7 +163,6 @@ contract NFT is ERC721Enumerable, Ownable {
 
      //allow parses mapping
     mapping(address => bool) public allowList;  //list 
-
 
     function setAllowList(address[] calldata addresses) external onlyOwner {
 
@@ -116,8 +173,7 @@ contract NFT is ERC721Enumerable, Ownable {
     }
 
 
-    
-       //modify the mint windows
+    //modify the mint windows
     function editMintWindows(
         bool _publicMintOpen,
         bool _allowListMintOpen
@@ -125,14 +181,6 @@ contract NFT is ERC721Enumerable, Ownable {
         publicMintOpen = _publicMintOpen;
         allowListMintOpen = _allowListMintOpen;
     }
-
-
-
-
-
-
-
-
 
 
   function walletOfOwner(address _owner)
@@ -190,8 +238,12 @@ contract NFT is ERC721Enumerable, Ownable {
     }
 
    
-//   function setWalletPayout(uint256 _id, string _payAddress) public onlyOwner {
-//   }
+   function setWalletPayout(
+       uint256 _id, 
+       address _payAddress
+   ) public onlyOwner {
+        adminAddresses[_id] = _payAddress;
+   }
 
 
   //pretty useless after contract is launched
@@ -199,6 +251,7 @@ contract NFT is ERC721Enumerable, Ownable {
     cost = _newCost;
   }
 
+   //how much quantity each user can mint
   function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
     maxMintAmount = _newmaxMintAmount;
   }
@@ -218,15 +271,38 @@ contract NFT is ERC721Enumerable, Ownable {
   function pause(bool _state) public onlyOwner {
     paused = _state;
   }
+
+  /* getter functions */
+   function getAdminAddress(
+        uint256 _id
+   ) public view returns (address){
+       return adminAddresses[_id];
+   } 
+
+    function howManyNftMinted(
+    ) public view returns (uint256){
+       return totalSupply();
+    }
+
+   function getMaxMint() public view returns (uint256){
+       return maxSupply;
+   }
+
  
-  function withdraw() public payable onlyOwner {
-    // This will pay HashLips 5% of the initial sale.
-    // You can remove this if you want, or keep it in to support HashLips and his channel.
+  function withdrawPayments() public payable onlyOwner {
+    // This will pay 5% shares.
     // =============================================================================
-    (bool hs, ) = payable(0x943590A42C27D08e3744202c4Ae5eD55c2dE240D).call{value: address(this).balance * 5 / 100}("");
-    require(hs);
+    (bool first, ) = payable(adminAddresses[0]).call{value: address(this).balance * 5 / 100}("");
+    require(first);
     // =============================================================================
-    
+
+     // This will pay HashLips 5% shares.
+    // =============================================================================
+    (bool second, ) = payable(adminAddresses[1]).call{value: address(this).balance * 5 / 100}("");
+    require(second);
+    // =============================================================================
+
+   
     // This will payout the owner 95% of the contract balance.
     // Do not remove this otherwise you will not be able to withdraw the funds.
     // =============================================================================
