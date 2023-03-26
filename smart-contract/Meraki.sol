@@ -1,47 +1,124 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity >=0.7.0 <0.9.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
-contract Meraki is ERC721, ERC721Enumerable, Pausable, Ownable {
+contract meraki is ERC721Enumerable, Ownable {
+  using Strings for uint256;
+     
+  string baseURI; //return function
+  string public baseExtension = ".json";
 
-    /* -------------------------------- */
-    uint256 maxSupply = 100;  
-    uint256 allowListMaxSupply = 2; //un-unsed
+    address[5] public adminAddresses = [
+        0x3B1cC85f65223544A807b43d164A0BCc99eF6623, // chrome 
+        0x6d98fb0308b99E3e7f89e91cF9565378aEbAc2E1// opera
+    ]; 
 
-    //switches minting on 
-    //allow editing for mints
-    bool public publicMintOpen = false;    
-    bool public allowListMintOpen = false;
+    /* 20000000 = 0.02 Eth */
+    /* 80000000 = 0.08 Eth */
+    /* 80000000 = 0.08 Eth */
 
-    //allow parses mapping
-    mapping(address => bool) public allowList;  //list 
+  uint256 public cost = 0.01 ether; //public mint cost 
+  
+  uint256 public whitelist_cost = 0.01 ether; //white list cost
 
-    using Counters for Counters.Counter;
+  uint256 public maxMintAmount = 3; //how many each person can mint 
 
-    Counters.Counter private _tokenIdCounter;
+  uint256 public totalMaxSupply = 20;  //total max supply of NFTs 
 
-    constructor() ERC721("Meraki", "MRKI") {}
+  uint256 public maxSupply = 10;  //this gets updated !! (starting batch)
 
+  uint256 public nextBatchAddition = 10;  //how much each batch mints
 
-    //where our NFT images come from baseURI
-    function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://Qmaa6TuP2s9pSKczHF4rwWhTKUdygrrDs8RmYYqCjP3Hye/";
+   //allow editing for mints
+   bool public publicMintOpen = true;      //setter editMintWindows()
+   bool public allowListMintOpen = true;    //setter editMintWindows()
+
+  bool public paused = false;
+  bool public revealed = false;
+  string public notRevealedUri;
+
+  /* Important */
+  string public _name = "Smart Mindz Test";
+  string public _symbol = "SMDZ";
+
+  //Meta Data for Mint  
+  string public _initBaseURI = "ipfs://QmP7nDqvMKSZopkQFndFGkSPgwDzJb4Nk6DfDVia4iNXab";   
+  //Meta Data for before reveal (Hidden Meta Data)
+  string public _initNotRevealedUri = "ipfs://QmbqRtC4DkY7bdEp3D7jMoXSXwCNLmXPnG9dCea9HwMcGQ/hidden.json";  
+
+  constructor() ERC721(_name, _symbol) {
+    setBaseURI(_initBaseURI);
+    setNotRevealedURI(_initNotRevealedUri);
+  }
+
+  // internal
+  function _baseURI() internal view virtual override returns (string memory) {
+    return baseURI;
+  }
+
+  // public
+  function publicMint(uint256 _mintAmount) public payable {
+
+    uint256 supply = totalSupply();
+
+    require(publicMintOpen, "Public Mint Closed");
+    require(!paused);
+    require(_mintAmount > 0);
+    require(_mintAmount <= maxMintAmount,  "Public Mint Sold Out!");
+
+    require(supply + _mintAmount <= maxSupply);
+
+    if (msg.sender != owner()) {
+      require(msg.value >= cost * _mintAmount);
     }
 
-    function pause() public onlyOwner {
-        _pause();
+    for (uint256 i = 1; i <= _mintAmount; i++) {
+      _safeMint(msg.sender, supply + i);
+    }
+  }
+
+
+
+  //--------------------------------------------------- MERKLE TREE FOR WHITELIST
+
+    bytes32 public root = 0x9209c7c878c5f79446bae86a7e990639b243ef91f3c1791ea48e483888e0b92e; //up to the top 
+
+    function whitelistMint(uint256 _mintAmount, bytes32[] memory proof) public payable {
+
+        uint256 supply = totalSupply();
+
+        require(allowListMintOpen, "AllowList Mint Closed");
+
+        //merkle tree proof
+         require(isValid(proof, keccak256(abi.encodePacked(msg.sender))), "Not a part of Allowlist");
+
+        require(!paused);
+        require(_mintAmount > 0);
+        require(_mintAmount <= maxMintAmount, "Whitelist Mint Sold Out!");
+
+        require(supply + _mintAmount <= maxSupply);
+
+        if (msg.sender != owner()) {
+        require(msg.value >= cost * _mintAmount);
+        }
+
+        for (uint256 i = 1; i <= _mintAmount; i++) {
+        _safeMint(msg.sender, supply + i);
+        }
+
+    }
+       function isValid(bytes32[] memory proof, bytes32 leaf) public view returns (bool) {
+        return MerkleProof.verify(proof, root, leaf);
     }
 
-    function unpause() public onlyOwner {
-        _unpause();
-    }
-
-
+//------------------------------------------ end of whitelist dev
+  
     //modify the mint windows
     function editMintWindows(
         bool _publicMintOpen,
@@ -51,102 +128,135 @@ contract Meraki is ERC721, ERC721Enumerable, Pausable, Ownable {
         allowListMintOpen = _allowListMintOpen;
     }
 
-    /* Payment Conversion */ 
-    /* for test payment = for input on SMCRT*/ 
-    /* 10000000 = 0.01 Eth */
-    /* 80000000 = 0.08 Eth */
-    /* 80000000 = 0.08 Eth */
+
+  function walletOfOwner(address _owner)
+    public
+    view
+    returns (uint256[] memory)
+  {
+    uint256 ownerTokenCount = balanceOf(_owner);
+    uint256[] memory tokenIds = new uint256[](ownerTokenCount);
+    for (uint256 i; i < ownerTokenCount; i++) {
+      tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
+    }
+    return tokenIds;
+  }
+
+  function tokenURI(uint256 tokenId)
+    public
+    view
+    virtual
+    override
+    returns (string memory)
+  {
+    require(
+      _exists(tokenId),
+      "ERC721Metadata: URI query for nonexistent token"
+    );
     
-    /* 
-    Eth Price:
-    0.08
-    Matic Price: 
-    88
-    Cronos Price:
-    1888
-    */
-
-    //add publicMint & allowListMintOpen Variables
-    //require only allowList People to mint.
-    function allowListMint() public payable {
-
-        require(allowListMintOpen, "AllowList Mint Closed");
-
-        require(allowList[msg.sender], "You are not on the allow list!");
-
-         /* Payable here */  
-        require(msg.value == 0.08 ether, "Not Enough Funds!");
-
-        internalMint(); //counter
-
-    }
-     
-    /* public mint */
-    //add Payment DONE 
-    //add limited supply DONE
-    //add batch mints 
-
-    function publicMint() public payable {
-        
-        require(publicMintOpen, "Public Mint Closed");
-
-        /* Payable here */  
-        require(msg.value == 0.08 ether, "Not Enough Funds!");
-
-        internalMint(); //counter
-
+    if(revealed == false) {
+        return notRevealedUri;
     }
 
-    function internalMint() internal {
+    string memory currentBaseURI = _baseURI();
+    return bytes(currentBaseURI).length > 0
+        ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), baseExtension))
+        : "";
+  }
 
-        //total supply = how many NFTs minted so far
-        require(totalSupply() <  maxSupply, "Max Supply Reached");
 
-        //add internal mint !!
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(msg.sender, tokenId);
+    //only owner
+    function reveal() public onlyOwner {
+      revealed = true;
     }
 
 
-    //populate allowList
-
-    //add wallet address to allow list
-
-    function setAllowList(address[] calldata addresses) external onlyOwner {
-
-        for(uint256 i = 0; i < addresses.length; i++){
-            allowList[addresses[i]] = true; 
-        }
-
+    /* setter functions -------------------- */
+    function setMerkleRoot(bytes32 _root) public onlyOwner {
+      root = _root;
     }
 
-    //have to test on test net -after
-    function withdraw(address _addrs) external onlyOwner {
-
-        //get balance of contract
-        uint256 balance = address(this).balance;
-        payable(_addrs).transfer(balance);
-
+    //important
+    function setNextBatch() public onlyOwner {
+        require(maxSupply < totalMaxSupply, "Total Max Supply Reached!!!");
+        maxSupply = maxSupply + nextBatchAddition;
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
-        internal
-        whenNotPaused
-        override(ERC721, ERC721Enumerable)
-    {
-        super._beforeTokenTransfer(from, to, tokenId, batchSize);
+   
+   function setWalletPayout(
+       uint256 _id, 
+       address _payAddress
+   ) public onlyOwner {
+        adminAddresses[_id] = _payAddress;
+   }
+
+
+  //pretty useless after contract is launched
+  function setCost(uint256 _newCost) public onlyOwner {
+    cost = _newCost;
+  }
+
+   //how much quantity each user can mint
+  function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
+    maxMintAmount = _newmaxMintAmount;
+  }
+  
+  function setNotRevealedURI(string memory _notRevealedURI) public onlyOwner {
+    notRevealedUri = _notRevealedURI;
+  }
+
+  function setBaseURI(string memory _newBaseURI) public onlyOwner {
+    baseURI = _newBaseURI;
+  }
+
+  function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
+    baseExtension = _newBaseExtension;
+  }
+
+  function pause(bool _state) public onlyOwner {
+    paused = _state;
+  }
+
+  /* getter functions */
+   function getMerkleRoot() public view returns (bytes32){
+    return root; 
+   }
+
+   function getAdminAddress(
+        uint256 _id
+   ) public view returns (address){
+       return adminAddresses[_id];
+   } 
+
+    function howManyNftMinted(
+    ) public view returns (uint256){
+       return totalSupply();
     }
 
-    // The following functions are overrides required by Solidity.
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721Enumerable)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
-    }
+   function getMaxMint() public view returns (uint256){
+       return maxSupply;
+   }
 
+ 
+  function withdrawPayments() public payable onlyOwner {
+    // 5% shares.
+    // =============================================================================
+    (bool first, ) = payable(adminAddresses[0]).call{value: address(this).balance * 5 / 100}("");
+    require(first);
+    // =============================================================================
 
+     // 5% shares.
+    // =============================================================================
+    (bool second, ) = payable(adminAddresses[1]).call{value: address(this).balance * 5 / 100}("");
+    require(second);
+    // =============================================================================
+
+   
+    // This will payout the rest of the % of the contract balance.
+    // Do not remove this otherwise you will not be able to withdraw the funds.
+    // =============================================================================
+    (bool os, ) = payable(owner()).call{value: address(this).balance}("");
+    require(os);
+    // =============================================================================
+  }
 }
